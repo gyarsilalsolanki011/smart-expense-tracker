@@ -18,7 +18,11 @@ public class UserService {
     }
 
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username).orElseThrow(() -> new NullPointerException("User Not found with this Username "+username));
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(() -> new NullPointerException("User Not found with email "+email));
     }
 
     public List<User> getAllUsers() {

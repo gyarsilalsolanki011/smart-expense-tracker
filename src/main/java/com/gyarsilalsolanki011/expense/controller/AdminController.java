@@ -1,4 +1,4 @@
-package com.gyarsilalsolanki011.expense.contoller;
+package com.gyarsilalsolanki011.expense.controller;
 
 import com.gyarsilalsolanki011.expense.model.entity.User;
 import com.gyarsilalsolanki011.expense.service.UserService;

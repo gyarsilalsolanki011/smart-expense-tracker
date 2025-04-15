@@ -32,3 +32,9 @@ logging:
   level:
     org.springframework: INFO
     com.gyarsilalsolanki011.expense: DEBUG
+
+jwt:
+  secret:
+    key: ${JWT_SECRET}
+  expiration:
+    time: ${JWT_EXPIRATION_MS}
