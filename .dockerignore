@@ -1,0 +1,17 @@
+# Ignore build artifacts
+target/
+*.log
+
+# IDE config
+.idea/
+*.iml
+
+# Git & metadata
+.git/
+.gitignore
+
+# OS / editor files
+.DS_Store
+
+# Sensitive/local config
+.env
