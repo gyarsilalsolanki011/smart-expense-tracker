@@ -1,11 +1,12 @@
-package com.gyarsilalsolanki011.expense.model;
+package com.gyarsilalsolanki011.expense.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AuthRequest {
+public class RegisterRequest {
+    private String email;
     private String username;
     private String password;
 }

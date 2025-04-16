@@ -3,7 +3,9 @@ package com.gyarsilalsolanki011.expense;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
+@EnableScheduling
 @SpringBootApplication
 public class SmartExpenseTrackerApplication {
 
@@ -21,6 +23,8 @@ public class SmartExpenseTrackerApplication {
 		System.setProperty("SERVER_PORT", dotenv.get("SERVER_PORT"));
 		System.setProperty("JWT_SECRET", dotenv.get("JWT_SECRET"));
 		System.setProperty("JWT_EXPIRATION_MS", dotenv.get("JWT_EXPIRATION_MS"));
+		System.setProperty("MAIL_USERNAME", dotenv.get("MAIL_USERNAME"));
+		System.setProperty("MAIL_PASSWORD", dotenv.get("MAIL_PASSWORD"));
 		SpringApplication.run(SmartExpenseTrackerApplication.class, args);
 	}
 }

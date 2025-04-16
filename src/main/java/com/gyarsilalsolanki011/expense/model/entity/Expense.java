@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-@Setter
 @Entity
 @Table(name = "expense")
 public class Expense {
