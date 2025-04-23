@@ -22,14 +22,14 @@ public class AdminController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @DeleteMapping("/users/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/users/role")
-    public ResponseEntity<User> changeUserRole(@RequestParam Long userId, @RequestParam Role role) {
+    @PutMapping("/user/role")
+    public ResponseEntity<User> changeUserRole(@RequestParam Long userId, @RequestParam String role) {
         return ResponseEntity.ok(userService.changeUserRole(userId, role));
     }
 }

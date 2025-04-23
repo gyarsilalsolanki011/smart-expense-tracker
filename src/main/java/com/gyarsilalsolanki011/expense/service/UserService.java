@@ -27,10 +27,16 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User changeUserRole(Long userId, Role role) {
+    public User changeUserRole(Long userId, String role) {
+        Role userRole;
+        try {
+            userRole = Role.valueOf(role.toUpperCase());
+        } catch (IllegalArgumentException e){
+            throw new IllegalArgumentException("Invalid User role! Choose: USER, ADMIN, or MANAGER.");
+        }
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        user.setRole(role);
+        user.setRole(userRole);
         return userRepository.save(user);
     }
 

@@ -21,13 +21,13 @@ public class AuthService {
     private final CustomUserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
 
-    public StringResponse register(RegisterRequest request) {
-        request.setPassword(passwordEncoder.encode(request.getPassword()));
-        userRepository.save(UserMapper.mapToUser(request));
+    public StringResponse register(UserDto userDto) {
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userRepository.save(UserMapper.mapToUser(userDto));
         return new StringResponse("User registered successfully");
     }
 
-    public AuthResponse login(LoginRequest request) {
+    public AuthResponse login(AuthRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {

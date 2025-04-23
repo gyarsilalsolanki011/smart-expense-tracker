@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -28,7 +30,9 @@ public class EmailScheduler {
         List<User> users = userRepository.findAll();
 
         for (User user : users) {
-            LocalDate oneWeekAgo = LocalDate.now().minusDays(7);
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DAY_OF_YEAR, -7); // 7 days ago
+            Date oneWeekAgo = cal.getTime();
             List<Expense> expenses = expenseRepository.findExpensesInLastWeek(user, oneWeekAgo);
             if (!expenses.isEmpty()) {
                 String body = buildSummaryBody(expenses);

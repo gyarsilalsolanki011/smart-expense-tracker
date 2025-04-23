@@ -1,9 +1,9 @@
 package com.gyarsilalsolanki011.expense.controller;
 
+import com.gyarsilalsolanki011.expense.model.dto.ExpenseDto;
 import com.gyarsilalsolanki011.expense.model.entity.Expense;
 import com.gyarsilalsolanki011.expense.service.ExpenseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,9 +18,9 @@ public class ExpenseController {
 
     private final ExpenseService expenseService;
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Expense> addExpense(@AuthenticationPrincipal UserDetails userDetails,
-                                              @RequestBody Expense expense) {
+                                              @RequestBody ExpenseDto expense) {
         return ResponseEntity.ok(expenseService.addExpense(userDetails.getUsername(), expense));
     }
 
@@ -29,14 +29,15 @@ public class ExpenseController {
         return ResponseEntity.ok(expenseService.getAllExpenses(userDetails.getUsername()));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Expense> updateExpense(@PathVariable Long id, @RequestBody Expense updated) {
-        return ResponseEntity.ok(expenseService.updateExpense(id, updated));
+    @PutMapping("/update")
+    public ResponseEntity<Expense> updateExpense(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails,
+                                                 @RequestBody ExpenseDto updated) {
+        return ResponseEntity.ok(expenseService.updateExpense(userDetails.getUsername(), updated, id));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteExpense(@PathVariable Long id) {
-        expenseService.deleteExpense(id);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteExpense(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
+        expenseService.deleteExpense(userDetails.getUsername(), id);
         return ResponseEntity.noContent().build();
     }
 }
